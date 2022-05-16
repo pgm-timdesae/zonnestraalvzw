@@ -1,0 +1,500 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type BuildingsFixedReservationsExceptions {
+  id: Float!
+  fixed_reservations: BuildingsFixedReservations!
+  date: String
+  created_on: DateTime
+  buildings_fixed_reservations_id: Float!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type BuildingsRoomsReservations {
+  id: Float!
+  room: BuildingsRooms
+  from_date: DateTime
+  profile: Profiles!
+  till_date: DateTime
+  name: String
+  created_on: DateTime
+  edited_on: DateTime
+  building_room_id: Int
+  profile_id: Int
+}
+
+type Buildings {
+  id: Float!
+  room: [BuildingsRooms!]!
+  language: String!
+  title: String!
+  street: String!
+  number: String!
+  zip: String!
+  city: String!
+  country: String!
+  meta_id: Int
+  created_on: DateTime
+  edited_on: DateTime
+}
+
+type BuildingsRooms {
+  id: Float!
+  title: String
+  building: Buildings!
+  color_calendar: String
+  roomReservation: [BuildingsRoomsReservations!]
+  fixedReservation: [BuildingsFixedReservations!]
+}
+
+type BuildingsFixedReservations {
+  id: Float!
+  room: BuildingsRooms
+  name: String
+  profile: Profiles
+  from_date: DateTime
+  till_date: DateTime
+  start_time: String
+  end_time: String
+  frequency: String
+  created_on: DateTime
+  excepions: [BuildingsFixedReservationsExceptions!]
+  building_room_id: Int
+  profile_id: Int
+}
+
+type MediaFixedReservationsExceptions {
+  id: Float!
+  fixed_reservations: MediaFixedReservations!
+  date: String
+  created_on: DateTime
+  media_fixed_reservations_id: Float!
+}
+
+type MediaTypes {
+  id: Float!
+  title: String
+  created_on: DateTime
+  edited_on: DateTime
+  language: String
+  meta_id: Int
+  media: [Media!]!
+}
+
+type Location {
+  id: Float!
+  language: String!
+  extra_id: Int!
+  title: String!
+  street: String!
+  number: String!
+  zip: String!
+  city: String!
+  country: String!
+  lat: Float
+  lng: Float
+  show_overview: String
+  created_on: DateTime
+  edited_on: DateTime
+  media: [Media!]!
+  library: [Library!]!
+}
+
+type MediaRent {
+  id: Float!
+  name: String
+  rent_from: DateTime
+  rent_till: DateTime
+  returned: String
+  media: Media!
+  profile: Profiles!
+  profile_id: Int
+  media_id: Int
+}
+
+type Media {
+  id: Float!
+  title: String
+  description: String
+  location: Location!
+  created_on: DateTime
+  edited_on: DateTime
+  hidden: String
+  type: MediaTypes!
+  show_home: String
+  language: String
+  meta_id: Int
+  rent: [MediaRent!]
+  fixedReservation: [MediaFixedReservations!]!
+}
+
+type MediaFixedReservations {
+  id: Float!
+  media: Media
+  name: String
+  from_date: String
+  till_date: String
+  start_time: String
+  end_time: String
+  frequency: String
+  created_on: DateTime
+  excepions: [MediaFixedReservationsExceptions!]
+  profile: Profiles
+  media_id: Int
+  profile_id: Int
+}
+
+type ProfilesGroups {
+  id: Float!
+  name: String
+  role: [ProfilesGroupsRights!]!
+}
+
+type ProfilesGroupsRights {
+  id: Float!
+  profile: Profiles!
+  group: ProfilesGroups!
+  starts_on: DateTime
+  expires_on: DateTime
+}
+
+type TransportFixedReservationsExceptions {
+  id: Float!
+  fixedReservations: TransportFixedReservations!
+  date: String
+  created_on: DateTime
+  transport_fixed_reservations_id: Float!
+}
+
+type TransportReservations {
+  id: Float!
+  from_date: DateTime
+  till_date: DateTime
+  profile: Profiles!
+  name: String
+  created_on: DateTime
+  edited_on: DateTime
+  transport: Transport
+  transport_id: Int
+  profile_id: Int
+}
+
+type Transport {
+  id: Float!
+  title: String
+  brand: String
+  type: String
+  number: String
+  color: String
+  color_calendar: String
+  remarks: String
+  language: String
+  hidden: String
+  meta_id: Int
+  created_on: DateTime
+  edited_on: DateTime
+  reservation: [TransportReservations!]!
+  fixedReservation: [TransportFixedReservations!]!
+}
+
+type TransportFixedReservations {
+  id: Float!
+  transport: Transport
+  name: String
+  profile: Profiles
+  from_date: String
+  till_date: String
+  start_time: String
+  end_time: String
+  frequency: String
+  created_on: DateTime
+  excepions: [TransportFixedReservationsExceptions!]
+  transport_id: Int
+  profile_id: Int
+}
+
+type Profiles {
+  id: Float!
+  email: String!
+  password: String!
+  status: String!
+  display_name: String
+  url: String
+  registered_on: DateTime
+  last_login: DateTime
+  role: [ProfilesGroupsRights!]
+  mediaRent: [MediaRent!]!
+  mediaFixedReservation: [MediaFixedReservations!]!
+  libraryRent: [LibraryRent!]!
+  libraryReservation: [LibraryReservation!]!
+  roomReservation: [BuildingsRoomsReservations!]!
+  buildingsFixedReservations: [BuildingsFixedReservations!]!
+  transportReservation: [TransportReservations!]!
+  transportFixedReservations: [TransportFixedReservations!]!
+}
+
+type LibraryRent {
+  id: Float!
+  name: String
+  library: Library!
+  rent_from: DateTime
+  rent_till: DateTime
+  returned: String
+  profile: Profiles!
+  profile_id: Int
+  library_id: Int
+}
+
+type LibraryTypes {
+  id: Float!
+  title: String
+  language: String
+  created_on: DateTime
+  meta_id: Int
+  edited_on: DateTime
+  library: [Library!]!
+}
+
+type Library {
+  id: Float!
+  serial: Int!
+  title: String
+  description: String
+  publisher: String
+  author: String
+  year: Int
+  location: Location!
+  created_on: DateTime
+  edited_on: DateTime
+  hidden: String
+  type: LibraryTypes!
+  language: String
+  meta_id: Int
+  rent: [LibraryRent!]!
+  reservation: [LibraryReservation!]!
+}
+
+type LibraryReservation {
+  id: Float!
+  library: Library!
+  name: String
+  deleted: String
+  created_on: DateTime
+  profile: Profiles!
+  reservationDate: LibraryReservationDate
+  library_id: Int
+  profile_id: Int
+}
+
+type LibraryReservationDate {
+  id: Float!
+  from_date: DateTime
+  till_date: DateTime
+  created_on: DateTime
+  edited_on: DateTime
+  library_reservation_id: Float
+  library_reservation: LibraryReservation!
+}
+
+type MostPopularMedia {
+  id: Float!
+  title: String
+  description: String
+  type: String
+  total: Float!
+}
+
+type SignInResponse {
+  id: String!
+  access_token: String!
+}
+
+type Query {
+  getAllLibraries: [Library!]!
+  getNewLibraries: [Library!]!
+  getLibraryById(id: Int!): Library!
+  GetAllLibraryReservationByUser: [LibraryReservation!]!
+  getAllLibraryReservationForAdmin: [LibraryReservation!]!
+  GetOnelibraryReservationById(id: Int!): LibraryReservation!
+  libraryReservationDate(id: Int!): LibraryReservationDate!
+  getAllMedia: [Media!]!
+  getMostCommonlyMedia: [MostPopularMedia!]!
+  getMediaById(id: Int!): Media!
+  GetAllMediaRentByUser: [MediaRent!]!
+  getAllMediaRentForAdmin: [MediaRent!]!
+  getOneMediaRent(id: Int!): MediaRent!
+  getOnemediaFixedReservation(id: Int!): MediaFixedReservations!
+  getAllMediaFixedReservationForAdmin: [MediaFixedReservations!]!
+  getAllUsers: [Profiles!]!
+  profilesGroupsRight(id: Int!): ProfilesGroupsRights!
+  getAllbuildings: [Buildings!]!
+  getAllbuildingsRooms: [BuildingsRooms!]!
+  getOneBuildingsRoomById(id: Int!): BuildingsRooms!
+  getAllRoomsReservationForAdmin: [BuildingsRoomsReservations!]!
+  GetAllRoomsReservationByUser: [BuildingsRoomsReservations!]!
+  buildingsRoomsReservation(id: Int!): BuildingsRoomsReservations!
+  buildingsFixedReservations: [BuildingsFixedReservations!]!
+  getAllRoomsFixedReservationForAdmin: [BuildingsFixedReservations!]!
+  buildingsFixedReservation(id: Int!): BuildingsFixedReservations!
+  getAllCars: [Transport!]!
+  getOneTransportById(id: Int!): Transport!
+  getAllTransportReservationForAdmin: [TransportReservations!]!
+  GetAlltransportReservationsByUser: [TransportReservations!]!
+  transportReservation(id: Int!): TransportReservations!
+  getAlltransportFixedReservations: [TransportFixedReservations!]!
+  getAllCarsFixedReservationForAdmin: [TransportFixedReservations!]!
+  getTransportFixedReservationById(id: Int!): TransportFixedReservations!
+  transportFixedReservationsException(id: Int!): TransportFixedReservationsExceptions!
+}
+
+type Mutation {
+  createLibraryReservation(createLibraryReservationDateInput: CreateLibraryReservationDateInput!, createLibraryReservationInput: CreateLibraryReservationInput!): LibraryReservation!
+  updateLibraryReservation(updateLibraryReservationInput: UpdateLibraryReservationInput!): LibraryReservation!
+  removeLibraryReservation(id: Int!): LibraryReservation!
+  createMediaRent(createMediaRentInput: CreateMediaRentInput!): MediaRent!
+  updateMediaRent(updateMediaRentInput: UpdateMediaRentInput!): MediaRent!
+  createLibraryRent(createLibraryRentInput: CreateLibraryRentInput!): LibraryRent!
+  updateLibraryRent(updateLibraryRentInput: UpdateLibraryRentInput!): LibraryRent!
+  createMediaFixedReservation(createMediaFixedReservationsInput: CreateMediaFixedReservationsInput!): MediaFixedReservations!
+  removeMediaFixedReservation(id: Int!): MediaFixedReservations!
+  createMediaFixedReservationsException(createMediaFixedReservationExceptionsInput: CreateMediaFixedReservationsExceptionsInput!): [MediaFixedReservationsExceptions!]!
+  deleteMediaFixedReservationsException(deleteMediaFixedReservationExceptionsInput: DeleteMediaFixedReservationExceptionsInput!): [MediaFixedReservationsExceptions!]!
+  createUser(createProfileInput: CreateProfileInput!): Profiles!
+  login(password: String!, email: String!): SignInResponse!
+  createRoomReservation(createBuildingsRoomsReservationInput: CreateBuildingsRoomsReservationInput!): BuildingsRoomsReservations!
+  removeBuildingsRoomsReservation(id: Int!): BuildingsRoomsReservations!
+  createRoomFixedReservation(createBuildingsFixedReservationInput: CreateBuildingsFixedReservationInput!): BuildingsFixedReservations!
+  removeBuildingsFixedReservation(id: Int!): BuildingsFixedReservations!
+  createBuildingsFixedReservationsException(createBuildingsFixedReservationExceptionsInput: CreateBuildingsFixedReservationExceptionsInput!): [BuildingsFixedReservationsExceptions!]!
+  deleteBuildingsFixedReservationsException(deleteBuildingsFixedReservationExceptionsInput: DeleteBuildingsFixedReservationExceptionsInput!): [BuildingsFixedReservationsExceptions!]!
+  createCarReservation(createTransportReservationInput: CreateTransportReservationInput!): TransportReservations!
+  removeTransportReservation(id: Int!): TransportReservations!
+  createTransportFixedReservation(createTransportFixedReservationInput: CreateTransportFixedReservationInput!): TransportFixedReservations!
+  removeTransportFixedReservation(id: Int!): TransportFixedReservations!
+  createTransportFixedReservationsException(createTransportFixedReservationsExceptionInput: CreateTransportFixedReservationsExceptionInput!): [TransportFixedReservationsExceptions!]!
+  deleteTransportFixedReservationsException(deleteTransportFixedReservationsExceptionsInput: DeleteTransportFixedReservationsExceptionsInput!): [TransportFixedReservationsExceptions!]!
+}
+
+input CreateLibraryReservationDateInput {
+  from_date: DateTime!
+  till_date: DateTime!
+}
+
+input CreateLibraryReservationInput {
+  library_id: Int!
+  name: String!
+  created_on: DateTime
+}
+
+input UpdateLibraryReservationInput {
+  id: Int!
+  deleted: String
+}
+
+input CreateMediaRentInput {
+  media_id: Int!
+  name: String!
+  rent_from: DateTime!
+  rent_till: DateTime!
+}
+
+input UpdateMediaRentInput {
+  id: Int!
+  returned: String
+}
+
+input CreateLibraryRentInput {
+  library_id: Int!
+  name: String!
+  rent_from: DateTime!
+  rent_till: DateTime!
+}
+
+input UpdateLibraryRentInput {
+  id: Int!
+  returned: String
+}
+
+input CreateMediaFixedReservationsInput {
+  media_id: Int!
+  name: String!
+  frequency: String
+  created_on: DateTime
+  from_date: String
+  till_date: String
+  start_time: String
+  end_time: String
+}
+
+input CreateMediaFixedReservationsExceptionsInput {
+  media_fixed_reservations_id: Int!
+  dates: [String!]
+}
+
+input DeleteMediaFixedReservationExceptionsInput {
+  mediaFixedReservationExceptionsIds: [Float!]!
+}
+
+input CreateProfileInput {
+  email: String!
+  password: String!
+}
+
+input CreateBuildingsRoomsReservationInput {
+  building_room_id: Int!
+  name: String!
+  from_date: DateTime!
+  till_date: DateTime!
+}
+
+input CreateBuildingsFixedReservationInput {
+  building_room_id: Int!
+  name: String!
+  frequency: String
+  created_on: DateTime
+  from_date: String
+  till_date: String
+  start_time: String
+  end_time: String
+}
+
+input CreateBuildingsFixedReservationExceptionsInput {
+  buildings_fixed_reservations_id: Int!
+  dates: [String!]
+}
+
+input DeleteBuildingsFixedReservationExceptionsInput {
+  buildingsFixedReservationExceptionsIds: [Float!]!
+}
+
+input CreateTransportReservationInput {
+  transport_id: Int!
+  name: String!
+  from_date: DateTime!
+  till_date: DateTime!
+}
+
+input CreateTransportFixedReservationInput {
+  transport_id: Int!
+  name: String!
+  frequency: String
+  created_on: DateTime
+  from_date: String
+  till_date: String
+  start_time: String
+  end_time: String
+}
+
+input CreateTransportFixedReservationsExceptionInput {
+  transport_fixed_reservations_id: Int!
+  dates: [String!]
+}
+
+input DeleteTransportFixedReservationsExceptionsInput {
+  transportFixedReservationExceptionsIds: [Float!]!
+}
